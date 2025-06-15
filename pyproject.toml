@@ -2,8 +2,23 @@
 name = "deel-takehome"
 version = "0.1.0"
 description = "AE Take Home Exercise: Data system for financial balance alerts using dbt and Snowflake."
-requires-python = "==3.12"
+requires-python = "==3.12.0"
 dependencies = [
     "dbt-core>=1.9.0",
     "dbt-snowflake>=1.9.0",
+    "pandas>=2.2.3",
+    "snowflake-connector-python[pandas]>=3.7.0",
+    "pytest>=8.3.4",
+    "slack-sdk>=3.35.0",
+]
+
+[tool.setuptools]
+packages = ["monitoring"]
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "."
+]
+testpaths = [
+    "tests"
 ]
