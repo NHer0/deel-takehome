@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: stg__organizations
+    description: Cleaned and standardized organization data
+    columns:
+      - name: organization_id
+        description: Unique identifier for the organization
+        tests:
+          - unique
+          - not_null
+      - name: first_payment_date
+        description: Date of the first payment made by the organization. It can be null if the organization has not made any payments.
+      - name: last_payment_date
+        description: Date of the most recent payment made by the organization. It can be null if the organization has not made any payments.
+      - name: legal_entity_country_code
+        description: Country code of the organization's legal entity
+        tests:
+          - not_null
+      - name: count_total_contracts_active
+        description: Number of active contracts for the organization
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: created_at_utc
+        description: Date when the organization was created (UTC+0)
+        tests:
+          - not_null
+
+  - name: stg__invoices
+    description: Cleaned and standardized invoice data.
+    columns:
+      - name: invoice_id
+        description: Unique identifier for the invoice
+        tests:
+          - unique
+          - not_null
+      - name: parent_invoice_id
+        description: ID of the parent invoice if this is a child invoice
+      - name: transaction_id
+        description: Unique identifier for the transaction
+        tests:
+          - not_null
+      - name: organization_id
+        description: ID of the organization this invoice belongs to
+        tests:
+          - not_null
+      - name: invoice_type
+        description: Type of the invoice
+        tests:
+          - not_null
+      - name: invoice_status
+        description: Current status of the invoice (e.g., paid, pending, cancelled)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pending', 'skipped', 'refunded', 'paid', 'cancelled', 'credited', 'open', 'failed', 'processing']
+      - name: invoice_currency
+        description: Currency of the invoice amount
+        tests:
+          - not_null
+      - name: payment_currency
+        description: Currency used for payment
+      - name: payment_method
+        description: Method used for payment
+      - name: invoice_amount
+        description: Original invoice amount in the invoice currency
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: payment_amount
+        description: Amount paid in the payment currency
+      - name: invoice_fx_rate
+        description: Exchange rate used for the invoice
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: payment_fx_rate
+        description: Exchange rate used for the payment
+      - name: created_at_utc
+        description: Timestamp when the invoice was created (UTC+0)
+        tests:
+          - not_null
