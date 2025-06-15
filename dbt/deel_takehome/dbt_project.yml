@@ -16,13 +16,11 @@ clean-targets:
 models:
   deel_takehome:
     staging:
-      +materialized: view
       +schema: staging
-    marts:
-      +materialized: table
-      +schema: marts
+    fact_tables:
+      +schema: fact_tables
 
 seeds:
   deel_takehome:
     landing:
-      +schema: LANDING
+      +schema: landing

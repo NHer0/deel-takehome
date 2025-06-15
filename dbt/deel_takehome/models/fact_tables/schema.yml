@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct__organizations_balance
+    description: Daily organization balances with balance change tracking and significant change detection
+    columns:
+      - name: organization_id
+        description: Unique identifier for the organization
+        tests:
+          - not_null
+      - name: balance_date
+        description: Date of the balance record
+        tests:
+          - not_null
+      - name: daily_balance_change_usd
+        description: Daily balance change in USD
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: daily_invoices_paid_count
+        description: Number of invoices paid on this day
+        tests: 
+          - not_null
+      - name: balance_usd
+        description: Cumulative balance up to and including this day
+      - name: previous_balance_usd
+        description: Balance from the previous day
+      - name: balance_change_percentage
+        description: Percentage change in balance compared to previous day
+      - name: is_significant_change
+        description: Flag indicating if the balance changed by more than 50%
+        tests:
+          - not_null
+    
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - organization_id
+            - balance_date
