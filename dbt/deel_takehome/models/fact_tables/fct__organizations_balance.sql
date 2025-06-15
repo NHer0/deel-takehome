@@ -6,7 +6,6 @@
 }}
 
 {% set stg_invoices = ref('stg__invoices') %}
-{% set stg_organizations = ref('stg__organizations') %}
 
 with daily_agg_invoice_data as (
     select
