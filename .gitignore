@@ -1,1 +1,4 @@
-input/invoices.csv
+input/invoices.
+*.egg-info
+.env
+build/
