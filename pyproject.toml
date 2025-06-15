@@ -1,0 +1,9 @@
+[project]
+name = "deel-takehome"
+version = "0.1.0"
+description = "AE Take Home Exercise: Data system for financial balance alerts using dbt and Snowflake."
+requires-python = "==3.12"
+dependencies = [
+    "dbt-core>=1.9.0",
+    "dbt-snowflake>=1.9.0",
+]
