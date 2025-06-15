@@ -45,10 +45,5 @@ daily_balances_with_previous_balance as (
 
 select
     *,
-    (daily_balance_change_usd / previous_balance_usd * 100) as balance_change_percentage,
-    case 
-        when (daily_balance_change_usd / previous_balance_usd) * 100 > 50
-        then true
-        else false
-    end as is_significant_change
+    (daily_balance_change_usd / previous_balance_usd * 100) as balance_change_percentage
 from daily_balances_with_previous_balance
