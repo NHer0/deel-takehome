@@ -10,4 +10,4 @@ sources:
         description: Raw organization data loaded from seed files. Contains information about organizations including their payment history and contract status.
       - name: invoices
         description: Raw invoice data loaded from seed files. Contains detailed information about all invoices including payment status, amounts, and currency conversions.
-        identifier: invoices_sample
+        identifier: invoices
