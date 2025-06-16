@@ -36,7 +36,16 @@ The assumption is that this date will come from a scheduling system (for example
 The function is flexible and is design to work in any other table/target_column. It also alerts to a slack_channel if the required slack env variables exist.
 
 Also important, it has been assumed that we are monitoring the changes relative to previous balance data point, in opposition to look into natural changes happening in one natural day.
-In case we would like to look to monitor happening in a natural day the function can be easily adapted by using QUERY_ALT in folder `monitoring_queries.py`
+In case we would like to look to monitor happening in a natural day the function can be easily adapted by using QUERY_ALT in folder `monitoring_queries.py`.
+
+## Airflow
+I've created a draft framework(folder `Airflow`) to create a local instance of Airflow and a DAG to execute the dbt models. The local Airflow instace is correctly created (see how to at the end of this document) but some refinements will be required to successfull run the DAG (see next steps.
+
+## Next Steps
+ - Complete the Airflow functionalities, so the dbt model can are run on a schedule
+ - Once we have that, we can implement a dbt test to monitor the balance and raise and alert on Slack when above the threshold
+ - Assuming some modifications on the input data, we could make the data pipeline incremental
+ - Add dbt unit tests to the dbt models
 
 ## Output
  - Produced fact_tables and dimensions can be found in `output` folder in the form of csv files. For the fact_table, only a sample (balance_date > 2024-01-01) is provided in the repo as the file would be to big for the complete data to be pushed. The  complete data though can be found [here](https://drive.google.com/drive/folders/1fYLebMtyMLMqOAyeiP54HuNmyw6hW74w).
@@ -191,7 +200,7 @@ The project includes comprehensive tests for:
 
 ## Airflow
 
-This project uses Apache Airflow to orchestrate the execution of dbt models. Follow these steps to set up and run Airflow:
+Not fully functional yet. The DAG is created and the local instance of Airflow is created, but the DAG won't work without some refinements.
 
 ### Prerequisites
 
