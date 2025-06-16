@@ -27,12 +27,6 @@ models:
         description: Date when the organization was created (UTC+0)
         tests:
           - not_null
-      - name: organization_age_days
-        description: Number of days since the organization was created
-        tests:
-          - not_null
-          - dbt_utils.expression_is_true:
-              expression: ">= 0"
       - name: days_since_last_payment
         description: Number of days since the last payment
       - name: contract_portfolio_size
@@ -41,9 +35,3 @@ models:
           - not_null
           - accepted_values:
               values: ['single_contract', 'small_portfolio', 'medium_portfolio', 'large_portfolio']
-      - name: organization_maturity
-        description: Categorization of the organization's maturity based on age
-        tests:
-          - not_null
-          - accepted_values:
-              values: ['new', 'growing', 'established', 'mature']
