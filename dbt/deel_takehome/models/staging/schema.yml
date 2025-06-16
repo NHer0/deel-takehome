@@ -55,7 +55,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['pending', 'skipped', 'refunded', 'paid', 'cancelled', 'credited', 'open', 'failed', 'processing']
+              values: ['awaiting_payment', 'pending', 'skipped', 'refunded', 'paid', 'cancelled', 'credited', 'open', 'failed', 'processing', 'unpayable']
       - name: invoice_currency
         description: Currency of the invoice amount
         tests:

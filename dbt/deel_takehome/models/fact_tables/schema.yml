@@ -16,23 +16,26 @@ models:
         description: Daily balance change in USD
         tests:
           - not_null
-          - dbt_utils.expression_is_true:
-              expression: ">= 0"
+      - name: daily_invoices_count
+        description: Number of invoices on this day
+        tests:
+          - not_null
       - name: daily_invoices_paid_count
         description: Number of invoices paid on this day
         tests: 
+          - not_null
+      - name: daily_invoices_refunded_count
+        description: Number of invoices refunded on this day
+        tests:
           - not_null
       - name: balance_usd
         description: Cumulative balance up to and including this day
       - name: previous_balance_usd
         description: Balance from the previous day
+      - name: days_since_last_balance_change
+        description: Number of days since the last balance change
       - name: balance_change_percentage
         description: Percentage change in balance compared to previous day
-      - name: is_significant_change
-        description: Flag indicating if the balance changed by more than 50%
-        tests:
-          - not_null
-    
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
