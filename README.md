@@ -29,6 +29,38 @@ After analyzing the data contained in the input:
   - Fact tables / Dimensions. Layer build on top of the staging views, implementing a star schema modelling approach. In this case we have:
     - fct__organizations_balance
     - dim__organizations
+ 
+### fct__organizations_balance
+Fact table that tracks daily organization balances and related metrics.
+
+**Purpose**
+It includes metrics such as daily balance changes, invoice counts, and cumulative balances.
+**Key Columns**
+- organization_id: Unique identifier for the organization.
+- balance_date: The date for which the balance is recorded.
+- daily_balance_change_usd: The change in balance for the day, calculated based on invoice statuses (paid or refunded).
+- daily_invoices_count: The total number of invoices processed on that day.
+- daily_invoices_paid_count: The number of invoices that were paid on that day.
+- daily_invoices_refunded_count: The number of invoices that were refunded on that day.
+- balance_usd: The cumulative balance up to and including the current day. It is based on payment data at the payment moment. We consider only invoices with status=paid or refunded should be considered for the balance (paid ones increase the balance while refunded ones decrease the balance, see Hypothesis section).
+- previous_balance_usd: The balance from the previous day.
+- days_since_last_balance_change: The number of days since the last balance change.
+- balance_change_percentage: The percentage change in balance compared to the previous balance date.
+
+### dim__organizations
+Dimension table that provides enriched data about organizations.
+
+**Purpose**
+Contextual Information: It provides context about organizations, such as their contract portfolio size and payment history.
+
+**Key Columns**
+- organization_id: Unique identifier for the organization.
+- legal_entity_country_code: The country code of the organization's legal entity.
+- count_total_contracts_active: The number of active contracts for the organization.
+- first_payment_date: The date of the first payment made by the organization.
+- last_payment_date: The date of the most recent payment made by the organization.
+- days_since_last_payment: The number of days since the last payment was made.
+- contract_portfolio_size: A categorization of the organization's contract portfolio size
 
 ## Monitoring
 A function has been created to extract the data from a snowflake table and compare a column value to a threshold, filtering based on a date.
