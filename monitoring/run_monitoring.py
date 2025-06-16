@@ -2,7 +2,7 @@ from typing import Optional
 import os
 from monitoring.utils import format_monitoring_results, get_connection_params
 from monitoring.create_snowflake_connector import create_snowflake_connector
-from monitoring.monitoring_query import QUERY
+from monitoring.monitoring_queries import QUERY
 from monitoring.snowflake_reader import read_snowflake_table
 from monitoring.slack_notifier import send_monitoring_results_to_slack
 
