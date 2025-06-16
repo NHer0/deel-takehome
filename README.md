@@ -19,7 +19,7 @@ After analyzing the data contained in the input:
  - We assumed that `invoice_fx_rate` is the rate when the service was agreed and `payment_fx_rate` when it was paid. We assume the latest to be the relevant one for balance calculations
  - According to the data there is no clear pattern on when the payments are processed in terms of invoice status, as almost all status have `payment` amount not null/null
  - Some assumptioms were needed therefore to calculate the daily_balance_change_usd:
-    - A change in balance is valid financially when the status of the invoice is `paid`
+    - A change in balance is valid financially when the status of the invoice is `paid` or `refunded`
     - We considered that `status = refunded` can impact negatively the balance. We substract the payment_amount from the cumulative balance when an invoice has this status
 
  ## Data Modelling
