@@ -188,3 +188,65 @@ The project includes comprehensive tests for:
 - Connection error handling
 - Query error handling
 - Slack notification success and failure cases
+
+## Airflow
+
+This project uses Apache Airflow to orchestrate the execution of dbt models. Follow these steps to set up and run Airflow:
+
+### Prerequisites
+
+- Docker and Docker Compose installed on your machine.
+
+### Setup
+
+1. Navigate to the `airflow` directory:
+   ```bash
+   cd airflow
+   ```
+
+2. Build and start the Airflow services:
+   ```bash
+   make airflow-all
+   ```
+
+   This command will:
+   - Build the Docker images
+   - Start the Airflow services
+   - Initialize the Airflow database
+   - Create an admin user
+
+3. Access the Airflow web interface at [http://localhost:8080](http://localhost:8080) and log in with:
+   - Username: `admin`
+   - Password: `admin`
+
+### Running dbt Models
+
+The Airflow DAG (`dbt_dag.py`) is configured to run the following dbt commands in sequence:
+- `dbt debug`
+- `dbt deps`
+- `dbt run`
+- `dbt test`
+
+You can trigger the DAG manually from the Airflow web interface or wait for its scheduled run.
+
+### Additional Commands
+
+- To build the Docker images:
+  ```bash
+  make airflow-build
+  ```
+
+- To start the Airflow services:
+  ```bash
+  make airflow-up
+  ```
+
+- To initialize the Airflow database:
+  ```bash
+  make airflow-init
+  ```
+
+- To create an admin user:
+  ```bash
+  make airflow-create-admin
+  ```
