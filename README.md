@@ -51,6 +51,7 @@ I've created a draft framework(folder `Airflow`) to create a local instance of A
  - Produced fact_tables and dimensions can be found in `output` folder in the form of csv files. For the fact_table, only a sample (balance_date > 2024-01-01) is provided in the repo as the file would be to big for the complete data to be pushed. The  complete data though can be found [here](https://drive.google.com/drive/folders/1fYLebMtyMLMqOAyeiP54HuNmyw6hW74w).
  - [Here](https://drive.google.com/file/d/1pBF78BlPiM5ScjE1N8ebhrXGRqnGbqO9/view?usp=drive_link) you can find a short clip demonstrating the dbt+snowflake building of the data assets (note that the null check for daily_balance_change fails due to some paid invoices not having null payment_amount). [Here](https://drive.google.com/file/d/1RRswXsOkEKiefDbBt8qIrpT98aNjZsyU/view?usp=drive_link) a short demonstration querying the data in Snowflake.
  - [Here](https://github.com/NHer0/deel-takehome/blob/master/monitoring/run_monitoring.py) is the monitoring function and [here](https://drive.google.com/file/d/1wgtB377xa2PPI523pq1pUn1BhnvUnbby/view?usp=drive_link) a small demo of the monitoring usage, including the Slack alerting.
+ - Video demonstrating the Aiflow draft setup [here](https://drive.google.com/file/d/1JTYpRw4hVl9nx2mUBAzbOcT1YjX5lCcK/view?usp=drive_link)
 
 ## Prerequisites
 
