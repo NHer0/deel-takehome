@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: landing
+    description: Raw data loaded from seed files containing organization and invoice information
+    database: DEEL_TAKEHOME_DEV
+    schema: EHERNANI_LANDING
+    tables:
+      - name: organizations
+        description: Raw organization data loaded from seed files. Contains information about organizations including their payment history and contract status.
+      - name: invoices
+        description: Raw invoice data loaded from seed files. Contains detailed information about all invoices including payment status, amounts, and currency conversions.
+        identifier: invoices

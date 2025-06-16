@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: dim__organizations
+    description: Dimension table containing organization enrichment data
+    columns:
+      - name: organization_id
+        description: Unique identifier for the organization
+        tests:
+          - unique
+          - not_null
+      - name: legal_entity_country_code
+        description: Country code of the organization's legal entity
+        tests:
+          - not_null
+      - name: count_total_contracts_active
+        description: Number of active contracts for the organization
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: first_payment_date
+        description: Date of the first payment made by the organization
+      - name: last_payment_date
+        description: Date of the most recent payment made by the organization
+      - name: created_at_utc
+        description: Date when the organization was created (UTC+0)
+        tests:
+          - not_null
+      - name: days_since_last_payment
+        description: Number of days since the last payment
+      - name: contract_portfolio_size
+        description: Categorization of the organization's contract portfolio size
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['single_contract', 'small_portfolio', 'medium_portfolio', 'large_portfolio']

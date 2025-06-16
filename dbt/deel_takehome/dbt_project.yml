@@ -1,0 +1,26 @@
+version: '1.0.0'
+name: 'deel_takehome'
+profile: 'deel_takehome'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         
+  - "target"
+  - "dbt_packages"
+
+models:
+  deel_takehome:
+    staging:
+      +schema: staging
+    fact_tables:
+      +schema: fact_tables
+
+seeds:
+  deel_takehome:
+    landing:
+      +schema: landing
